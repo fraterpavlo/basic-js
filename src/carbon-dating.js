@@ -17,11 +17,21 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function dateSample(sampleActivity) {
+  if (!(+sampleActivity) || 
+        sampleActivity.length == 0 ||  
+        typeof  sampleActivity != "string" ||
+        Math.sign(+sampleActivity) === -1 ||
+        +sampleActivity > 15) return false;
+  sampleActivity = +sampleActivity;
+  let k = 0.0001209424;
+  let result = Math.log(15/sampleActivity) / k;
+  return Math.ceil(result);
 }
 
 module.exports = {
   dateSample
 };
+
+
+// npm run test -- test/recursive-depth.test.js
